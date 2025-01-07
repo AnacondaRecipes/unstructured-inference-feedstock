@@ -49,6 +49,13 @@ about:
   summary: A library for performing inference using trained models.
   license: Apache-2.0
   license_file: LICENSE
+  license_family: Apache
+  Description: |
+    The unstructured-inference repo contains hosted model inference code for
+    layout parsing models. These models are invoked via API as part of the 
+    partitioning bricks in the unstructured package.
+  doc_url: https://github.com/Unstructured-IO/unstructured-inference/blob/main/README.md
+  dev_url: https://github.com/Unstructured-IO/unstructured-inference
 
 extra:
   recipe-maintainers:
