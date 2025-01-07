@@ -12,7 +12,8 @@ source:
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
-  skip: true  # [py<37 or py>311]
+  # skipping python 3.11 due to layoutparser not being built with it.
+  skip: true  # [py<37 or py>311 or s390x]
 
 requirements:
   host:
