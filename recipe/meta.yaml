@@ -1,0 +1,54 @@
+{% set name = "unstructured-inference" %}
+{% set version = "0.8.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/unstructured_inference-{{ version }}.tar.gz
+  sha256: a73ffdc89a6e55315ad9700878a9c18faf845989cf065ca69216e0893051be8d
+
+build:
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+  skip: true  # [py<37 or py>311]
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+    - wheel
+  run:
+    - python
+    - layoutparser
+    - python-multipart
+    - huggingface_hub
+    - numpy <2
+    - opencv !=4.7.0.68
+    - onnx
+    - onnxruntime >=1.17.0
+    - matplotlib-base
+    - pytorch
+    - timm
+    - transformers >=4.25.1
+    - rapidfuzz
+
+test:
+  imports:
+    - unstructured_inference
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/Unstructured-IO/unstructured-inference
+  summary: A library for performing inference using trained models.
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - AddYourGitHubIdHere
