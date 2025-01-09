@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/unstructured_inference-{{ version }}.tar.gz
-  sha256: a73ffdc89a6e55315ad9700878a9c18faf845989cf065ca69216e0893051be8d
+  url: https://github.com/Unstructured-IO/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 5dea5aa231139e131513296087a1ed4c5dfeedb1487f3400753f1b9593becf68
 
 build:
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
@@ -37,12 +37,17 @@ requirements:
     - rapidfuzz
 
 test:
+  source_files:
+    - test_unstructured_inference
+    - sample-docs
   imports:
     - unstructured_inference
   commands:
     - pip check
+    - pytest -vv --fixtures .
   requires:
     - pip
+    - pytest
 
 about:
   home: https://github.com/Unstructured-IO/unstructured-inference
@@ -59,4 +64,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - AddYourGitHubIdHere
+    - psteyer
