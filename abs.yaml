@@ -1,6 +1,5 @@
 upload_channels:
   - sfe1ed40
 channels:
-  - https://staging.continuum.io/prefect/fs/layoutparser-feedstock/pr1/ca9d4d4
-  - https://staging.continuum.io/prefect/fs/pdfplumber-feedstock/pr2/d3d3aaf
+  - https://staging.continuum.io/prefect/fs/layoutparser-feedstock/pr1/22749d9
 
