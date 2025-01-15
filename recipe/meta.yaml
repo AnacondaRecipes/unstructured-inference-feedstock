@@ -1,0 +1,67 @@
+{% set name = "unstructured-inference" %}
+{% set version = "0.8.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/Unstructured-IO/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+  sha256: 5dea5aa231139e131513296087a1ed4c5dfeedb1487f3400753f1b9593becf68
+
+build:
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+  # skipping python 3.11 due to layoutparser not being built with it.
+  skip: true  # [py<37 or py>311 or s390x]
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+    - wheel
+  run:
+    - python
+    - layoutparser
+    - python-multipart
+    - huggingface_hub
+    - numpy <2
+    - opencv !=4.7.0.68
+    - onnx
+    - onnxruntime >=1.17.0
+    - matplotlib-base
+    - pytorch
+    - timm
+    - transformers >=4.25.1
+    - rapidfuzz
+
+test:
+  source_files:
+    - test_unstructured_inference
+    - sample-docs
+  imports:
+    - unstructured_inference
+  commands:
+    - pip check
+    - pytest -vv --fixtures .
+  requires:
+    - pip
+    - pytest
+
+about:
+  home: https://github.com/Unstructured-IO/unstructured-inference
+  summary: A library for performing inference using trained models.
+  license: Apache-2.0
+  license_file: LICENSE
+  license_family: Apache
+  Description: |
+    The unstructured-inference repo contains hosted model inference code for
+    layout parsing models. These models are invoked via API as part of the 
+    partitioning bricks in the unstructured package.
+  doc_url: https://github.com/Unstructured-IO/unstructured-inference/blob/main/README.md
+  dev_url: https://github.com/Unstructured-IO/unstructured-inference
+
+extra:
+  recipe-maintainers:
+    - psteyer
